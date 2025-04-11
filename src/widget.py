@@ -19,3 +19,14 @@ def mask_account_card(bank_details: str) -> str:
 
     details_to_list[-1] = mask
     return " ".join(details_to_list)
+
+
+def get_date(date: str) -> str:
+    """
+    Функция меняет формат даты
+    :param date: исходная дата, тип string
+    :return: измененный формат даты, тип string
+    """
+
+    modified_date = f"{date[8:10]}.{date[5:7]}.{date[0:4]}"
+    return modified_date
