@@ -33,7 +33,7 @@ pip install -r requirements.txt
 ```python
 from src.masks import get_mask_card_number
 
-card_number = str(7000792289606361)
+card_number = int(7000792289606361)
 print(get_mask_card_number(card_number))
 ```
 
@@ -42,7 +42,7 @@ print(get_mask_card_number(card_number))
 ```python
 from src.masks import get_mask_account
 
-account_number = str(73654108430135874305)
+account_number = int(73654108430135874305)
 print(get_mask_account(account_number))
 ```
 
