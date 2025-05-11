@@ -111,6 +111,50 @@ for element in sort_by_date(operations, reverse):
     print(element)
 ```
 
+### Модуль generators.py
+Модуль содержит 3 функции:
+1. `filter_by_currency` - функция поочередно выдает транзакции, соответствующие заданной валюте.
+2. `transaction_descriptions` - функция возвращает описание каждой транзакции по очереди.
+3. `card_number_generator` - функция поочередно генерирует номера банковских карт в заданном диапазоне.
+
+#### Примеры использования
+
+Для проверки функции `filter_by_currency` запустите код ниже. В переменной `currency` можно ввести `"RUB"` или `"USD"`.
+```python
+from src.data import transaction_examples
+from src.generators import filter_by_currency
+
+transactions = transaction_examples()
+currency = "RUB"
+
+currency_transactions = filter_by_currency(transactions, currency)
+for _ in range(2):
+    print(next(currency_transactions))
+```
+
+Для проверки функции `transaction_descriptions` запустите код ниже. 
+```python
+from src.data import transaction_examples
+from src.generators import transaction_descriptions
+
+transactions = transaction_examples()
+
+descriptions = transaction_descriptions(transactions)
+for _ in range(5):
+    print(next(descriptions))
+```
+
+Для проверки функции `card_number_generator` запустите код ниже. В переменных `start_number` и `finish_number` можно ввести любые числа в диапазоне от 1 до 9999999999999999.
+```python
+from src.generators import card_number_generator
+
+start_number = 1
+finish_number = 5
+
+for card_number in card_number_generator(start_number, finish_number):
+    print(card_number)
+```
+
 ## Тестирование:
 
 Тесты всех функций реализованы в директории `tests`. 
