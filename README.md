@@ -144,7 +144,8 @@ for _ in range(5):
     print(next(descriptions))
 ```
 
-Для проверки функции `card_number_generator` запустите код ниже. В переменных `start_number` и `finish_number` можно ввести любые числа в диапазоне от 1 до 9999999999999999.
+Для проверки функции `card_number_generator` запустите код ниже. В переменных `start_number` и `finish_number` можно 
+ввести любые числа в диапазоне от 1 до 9999999999999999.
 ```python
 from src.generators import card_number_generator
 
@@ -153,6 +154,33 @@ finish_number = 5
 
 for card_number in card_number_generator(start_number, finish_number):
     print(card_number)
+```
+
+### Модуль decorators.py
+Модуль содержит функцию-декоратор `log`, которая логирует результаты выполнения декорируемой функции или возникшие 
+ошибки. Декоратор может принимать файл для записи логов.
+
+#### Примеры использования
+
+Для проверки функции `log` запустите код ниже. При вызове декоратора в качестве аргумента можно передать переменную 
+`filename_exist` (для записи логов в файл) или `filename_not_exist` (для вывода результатов в консоль). Для получения 
+лога с ошибкой при вызове функции `my_function` необходимо указать некорректный перечень аргументов
+```python
+import os
+
+from src.decorators import log
+
+filename_exist = os.path.join(os.path.dirname(__file__), "mylog.txt")
+filename_not_exist = ""
+
+
+@log(filename_exist)
+def my_function(x: int, y: int) -> int:
+    """Функция складывает 2 числа"""
+    return x + y
+
+
+my_function(1, 2)
 ```
 
 ## Тестирование:

@@ -1,0 +1,6 @@
+2025-05-12 03:01:23 | my_function error: TypeError. Inputs: (1, 2, 7), {}
+2025-05-12 03:01:41 | my_function error: ZeroDivisionError. Inputs: (1, 0), {}
+2025-05-12 03:01:53 | my_function ok
+2025-05-12 03:45:06 | my_function ok
+2025-05-12 04:08:17 | my_function error: TypeError. Inputs: (1, 2, 7), {}
+
