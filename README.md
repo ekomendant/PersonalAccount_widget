@@ -121,10 +121,13 @@ for element in sort_by_date(operations, reverse):
 
 Для проверки функции `filter_by_currency` запустите код ниже. В переменной `currency` можно ввести `"RUB"` или `"USD"`.
 ```python
-from src.data import transaction_examples
+import json
+
 from src.generators import filter_by_currency
 
-transactions = transaction_examples()
+with open("data/operations.json", "r", encoding="utf-8") as json_file:
+    transactions = json.load(json_file)
+
 currency = "RUB"
 
 currency_transactions = filter_by_currency(transactions, currency)
@@ -134,10 +137,12 @@ for _ in range(2):
 
 Для проверки функции `transaction_descriptions` запустите код ниже. 
 ```python
-from src.data import transaction_examples
+import json
+
 from src.generators import transaction_descriptions
 
-transactions = transaction_examples()
+with open("data/operations.json", "r", encoding="utf-8") as json_file:
+    transactions = json.load(json_file)
 
 descriptions = transaction_descriptions(transactions)
 for _ in range(5):
@@ -181,6 +186,50 @@ def my_function(x: int, y: int) -> int:
 
 
 my_function(1, 2)
+```
+
+### Модуль utils.py
+Модуль содержит 2 функции:
+1. `convert_json_transactions` - функция принимает на вход путь до JSON-файла и возвращает список словарей с данными о 
+финансовых транзакциях.
+2. `get_amount` - функция принимает транзакцию в виде словаря и возвращает сумму операции (если валюта отличается от 
+RUB, то вызывает функцию convert_currency для конвертации).
+
+Для проверки функций запустите код ниже. В переменной `number` моно указать любое число от 0 до 99.
+```python
+import os
+
+from src.utils import convert_json_transactions, get_amount
+
+filename = os.path.join(os.path.dirname(__file__), "data", "operations.json")
+transactions = convert_json_transactions(filename)
+number = 5
+
+#Проверка функции convert_json_transactions
+print(convert_json_transactions(filename))
+
+#Проверка функции get_amount
+print(get_amount(transactions[number]))
+```
+
+### Модуль external_api.py
+Модуль содержит функции `convert_currency` которая обращается к API ресурса https://apilayer.com/ и конвертирует сумму 
+из исходной валюты на рубли (по курсу на переданную дату).- функция фильтрует операции клиента по заданному статусу.
+
+Для работы функции необходимо получить API-ключ к ресурсу. Затем:
+1. в основной директории проекта создать копию файла `.env.example`,
+2. переименовать файл в `.env`,
+3. указать полученный API-ключ в переменной `API_KEY`.
+
+Для проверки функций запустите код ниже. В переменных `from_currency`, `amount` и `date` можно ввести иные значения (с 
+сохранением формата данных).
+```python
+from src.external_api import convert_currency
+
+from_currency = "USD"
+amount = "8221.37"
+date = "2019-07-03"
+print(convert_currency(from_currency, amount, date))
 ```
 
 ## Тестирование:
