@@ -24,9 +24,13 @@ def convert_currency(from_currency: str, amount: str, date: str) -> Any:
     )
 
     headers = {"apikey": API_KEY}
-    response = requests.get(url, headers=headers)
 
-    if response.status_code == 200:
-        return True, response.json()["result"]
+    if from_currency == to_currency:
+        return True, amount
     else:
-        return False, ""
+        response = requests.get(url, headers=headers)
+
+        if response.status_code == 200:
+            return True, response.json()["result"]
+        else:
+            return False, ""

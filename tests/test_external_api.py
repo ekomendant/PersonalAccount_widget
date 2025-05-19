@@ -32,3 +32,8 @@ def test_convert_currency_error(mock_get):
         "https://api.apilayer.com/exchangerates_data/convert?to=RUB&from=USD&amount=12.25&date=2025-05-16",
         headers=headers,
     )
+
+
+# Проверка функции, если конвертировать валюту не нужно
+def test_convert_currency_rub():
+    assert convert_currency("RUB", "12.25", "2025-05-16") == (True, "12.25")
