@@ -206,7 +206,7 @@ transactions = convert_json_transactions(filename)
 number = 5
 
 #Проверка функции convert_json_transactions
-print(convert_json_transactions(filename))
+print(transactions)
 
 #Проверка функции get_amount
 print(get_amount(transactions[number]))
