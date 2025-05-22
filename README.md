@@ -195,7 +195,7 @@ my_function(1, 2)
 2. `get_amount` - функция принимает транзакцию в виде словаря и возвращает сумму операции (если валюта отличается от 
 RUB, то вызывает функцию convert_currency для конвертации).
 
-Для проверки функций запустите код ниже. В переменной `number` моно указать любое число от 0 до 99.
+Для проверки функций запустите код ниже. В переменной `number` можно указать любое число от 0 до 99.
 ```python
 import os
 
@@ -230,6 +230,28 @@ from_currency = "USD"
 amount = "8221.37"
 date = "2019-07-03"
 print(convert_currency(from_currency, amount, date))
+```
+
+### Модуль sources.py
+Модуль содержит 2 функции:
+1. `import_excel_transactions` - функция принимает на вход путь файла EXCEL и возвращает список словарей с данными о 
+финансовых транзакциях.
+2. `import_csv_transactions` - функция принимает на вход путь файла CSV и возвращает список словарей с данными о 
+финансовых транзакциях.
+
+Для проверки функций запустите код ниже. В переменных `file_csv` и `file_excel` можно указать свой путь до файла. 
+Функции лучше запускать отдельно друг от друга.
+```python
+from config import PATH
+from src.sources import import_csv_transactions, import_excel_transactions
+
+# Открытие файла CSV
+file_csv = str(PATH / "data" / "transactions.csv")
+print(import_csv_transactions(file_csv))
+
+# Открытие файла EXCEL
+file_excel = str(PATH / "data" / "transactions_excel.xlsx")
+print(import_excel_transactions(file_excel))
 ```
 
 ## Тестирование:

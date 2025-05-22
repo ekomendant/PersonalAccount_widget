@@ -82,4 +82,4 @@ def test_get_amount_fnc_success(mock_convert_currency, operation_usd):
 @patch("src.external_api.convert_currency")
 def test_get_amount_fnc_error(mock_convert_currency, operation_usd):
     mock_convert_currency.return_value = False, ""
-    assert get_amount(operation_usd) == "Не удалось ковертировать валюту из USD в RUB."
+    assert get_amount(operation_usd) == "Не удалось конвертировать валюту из USD в RUB."
