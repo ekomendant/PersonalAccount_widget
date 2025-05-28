@@ -19,9 +19,9 @@ def mask_account_card(bank_details: str) -> str:
 
             if number.isdigit():
                 if len(number) == 16:
-                    mask = get_mask_card_number(int(number))
+                    mask = get_mask_card_number(number)
                 elif len(number) == 20:
-                    mask = get_mask_account(int(number))
+                    mask = get_mask_account(number)
                 else:
                     return "Номер карты или счета указан неверно."
 

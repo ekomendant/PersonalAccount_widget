@@ -9,7 +9,7 @@ def filter_by_state(states_list: list[dict], state: str = "EXECUTED") -> list[di
 
     filtered_states = list()
     for element in states_list:
-        if element["state"] == state:
+        if element.get("state") == state:
             filtered_states.append(element)
 
     return filtered_states

@@ -19,7 +19,11 @@ pip install -r requirements.txt
 
 ## Модули и примеры использования.
 
-Все операции для проверки работы функций, которые будут описаны ниже, необходимо запускать в модуле main.py.
+Все операции для проверки работы функций, которые будут описаны ниже, необходимо запускать в корне проекта.
+
+### Модуль main.py
+Модуль содержит функцию `main`, которая запрашивает у клиента данные для выборки транзакций и выводит список операций, 
+соответствующих его выбору.
 
 ### Модуль masks.py
 Модуль содержит 2 функции:
@@ -87,6 +91,8 @@ print(get_date(date))
 Модуль содержит 2 функции:
 1. `filter_by_state` - функция фильтрует операции клиента по заданному статусу.
 2. `sort_by_date` - функция сортирует операции клиента по дате.
+
+#### Примеры использования
 
 Для проверки функций запустите код ниже. В переменной `state` можно ввести `"EXECUTED"` или `"CANCELED"`,
 а в переменной `reverse` указать `True` или `False`
@@ -195,6 +201,8 @@ my_function(1, 2)
 2. `get_amount` - функция принимает транзакцию в виде словаря и возвращает сумму операции (если валюта отличается от 
 RUB, то вызывает функцию convert_currency для конвертации).
 
+#### Примеры использования
+
 Для проверки функций запустите код ниже. В переменной `number` можно указать любое число от 0 до 99.
 ```python
 import os
@@ -221,6 +229,8 @@ print(get_amount(transactions[number]))
 2. переименовать файл в `.env`,
 3. указать полученный API-ключ в переменной `API_KEY`.
 
+#### Примеры использования
+
 Для проверки функций запустите код ниже. В переменных `from_currency`, `amount` и `date` можно ввести иные значения (с 
 сохранением формата данных).
 ```python
@@ -239,6 +249,8 @@ print(convert_currency(from_currency, amount, date))
 2. `import_csv_transactions` - функция принимает на вход путь файла CSV и возвращает список словарей с данными о 
 финансовых транзакциях.
 
+#### Примеры использования
+
 Для проверки функций запустите код ниже. В переменных `file_csv` и `file_excel` можно указать свой путь до файла. 
 Функции лучше запускать отдельно друг от друга.
 ```python
@@ -252,6 +264,40 @@ print(import_csv_transactions(file_csv))
 # Открытие файла EXCEL
 file_excel = str(PATH / "data" / "transactions_excel.xlsx")
 print(import_excel_transactions(file_excel))
+```
+
+### Модуль descriptions.py
+Модуль содержит 2 функции:
+1. `import_excel_transactions` - функция принимает на вход путь файла EXCEL и возвращает список словарей с данными о 
+финансовых транзакциях.
+2. `count_descriptions` - функция считает количество транзакций по каждой категории (по полю "description").
+
+#### Примеры использования
+
+Для проверки функции `import_excel_transactions` запустите код ниже. 
+```python
+from config import PATH
+from src.sources import import_csv_transactions
+from src.descriptions import search_in_description
+
+if __name__ == "__main__":
+    file_csv = str(PATH / "data" / "transactions.csv")
+    transactions = import_csv_transactions(file_csv)
+    phrase = "вклад"
+    print(search_in_description(transactions, phrase))
+```
+
+Для проверки функции `count_descriptions` запустите код ниже. 
+```python
+from config import PATH
+from src.sources import import_csv_transactions
+from src.descriptions import count_descriptions
+
+if __name__ == "__main__":
+    file_csv = str(PATH / "data" / "transactions.csv")
+    transactions = import_csv_transactions(file_csv)
+    category = ["Перевод организации", "Перевод с карты на карту", "Открытие вклада"]
+    print(count_descriptions(transactions, category))
 ```
 
 ## Тестирование:
