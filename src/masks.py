@@ -10,7 +10,7 @@ file_handler.setFormatter(file_formatter)
 logger.addHandler(file_handler)
 
 
-def get_mask_card_number(card_number: int) -> str:
+def get_mask_card_number(card_number: str) -> str:
     """
     Функция преобразует номер карты в ее маску
     :param card_number: на вход подается номер карты, type integer
@@ -43,7 +43,7 @@ def get_mask_card_number(card_number: int) -> str:
         return "Номер карты указан неверно. Убедитесь, что ввели 16 цифр."
 
 
-def get_mask_account(account_number: int) -> str:
+def get_mask_account(account_number: str) -> str:
     """
     Функция преобразует номер счета в маску
     :param account_number: на вход подается номер счета, type integer
